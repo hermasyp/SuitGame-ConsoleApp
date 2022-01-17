@@ -2,6 +2,7 @@ import enum.SuitCharacter
 import usecase.SuitUseCase
 import usecase.SuitUseCaseImpl
 import java.lang.IllegalArgumentException
+import kotlin.random.Random
 
 class App {
 
@@ -13,6 +14,7 @@ class App {
         initialize()
         printHeader()
         inputPlayerCharacters()
+        showUserPick()
         proceedWinner()
     }
 
@@ -32,9 +34,7 @@ class App {
         while (playerOne == null) {
             inputPlayerOne()
         }
-        while (playerTwo == null) {
-            inputPlayerTwo()
-        }
+        inputPlayerTwo()
     }
 
     private fun inputPlayerOne() {
@@ -43,8 +43,15 @@ class App {
     }
 
     private fun inputPlayerTwo() {
-        println("Please Input Character from Player 2 : ")
-        playerTwo = parseUserInput(getInputFromUser())
+        val pos = Random.nextInt(0,2)
+        playerTwo = SuitCharacter.values()[pos]
+    }
+
+    private fun showUserPick(){
+        println("==================================")
+        println("Player 1 : ${playerOne?.name} Player 2 :  ${playerTwo?.name}")
+        println("==================================")
+
     }
 
     private fun proceedWinner() {
